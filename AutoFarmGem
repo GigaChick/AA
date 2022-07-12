@@ -70,7 +70,7 @@ end
 
 local function join() -- join teleporter
 local args = {
-    [1] = "_lobbytemplategreen6"
+    [1] = "_lobbytemplategreen13"
 }
 
 game:GetService("ReplicatedStorage").endpoints.client_to_server.request_join_lobby:InvokeServer(unpack(args))
@@ -78,7 +78,7 @@ end
 
 local function Create() -- Creates the map
 local args = {
-    [1] = "_lobbytemplategreen6",
+    [1] = "_lobbytemplategreen13",
     [2] = "namek_infinite",
     [3] = true,
     [4] = "Hard"
@@ -90,7 +90,7 @@ end
 
 local function start2() -- Starts the teleport
 local args = {
-    [1] = "_lobbytemplategreen6"
+    [1] = "_lobbytemplategreen13"
 }
 
 game:GetService("ReplicatedStorage").endpoints.client_to_server.request_start_game:InvokeServer(unpack(args))
