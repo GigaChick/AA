@@ -97,7 +97,6 @@ game:GetService("ReplicatedStorage").endpoints.client_to_server.request_start_ga
 end
 
 
-
 local function sell()
 if game:GetService("Workspace")["_wave_num"].Value > getgenv().wavetolose -1 then
   for i, v in next, game:GetService("Workspace")["_UNITS"]:GetChildren() do
