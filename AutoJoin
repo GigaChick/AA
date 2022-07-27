@@ -1,0 +1,42 @@
+repeat wait() until game:IsLoaded()
+
+local function join() -- join teleporter
+local args = {
+    [1] = "_lobbytemplategreen13"
+}
+
+game:GetService("ReplicatedStorage").endpoints.client_to_server.request_join_lobby:InvokeServer(unpack(args))
+end
+
+local function Create() -- Creates the map
+local args = {
+    [1] = "_lobbytemplategreen13",
+    [2] = "marineford_infinite",
+    [3] = true,
+    [4] = "Hard"
+}
+
+game:GetService("ReplicatedStorage").endpoints.client_to_server.request_lock_level:InvokeServer(unpack(args))
+
+end
+
+local function start2() -- Starts the teleport
+local args = {
+    [1] = "_lobbytemplategreen13"
+}
+
+game:GetService("ReplicatedStorage").endpoints.client_to_server.request_start_game:InvokeServer(unpack(args))
+end
+
+
+
+if game.PlaceId == 8304191830 then
+while true do
+join()
+task.wait(1)
+Create()
+task.wait(1)
+start2()
+task.wait(5)
+end
+
