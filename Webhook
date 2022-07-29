@@ -1,0 +1,69 @@
+wait(20)
+print("Func")
+repeat wait() until game.Players.LocalPlayer.PlayerGui.ResultsUI.Enabled == true
+local HttpService = game:GetService("HttpService")
+XP = tostring(game:GetService("Players").LocalPlayer.PlayerGui.ResultsUI.Holder.GoldGemXP.XPReward.Main.Amount.Text)
+gems = tostring(game:GetService("Players").LocalPlayer.PlayerGui.ResultsUI.Holder.GoldGemXP.GemReward.Main.Amount.Text)
+cwaves = game:GetService("Players").LocalPlayer.PlayerGui.ResultsUI.Holder.Middle.WavesCompleted.Text
+ctime = game:GetService("Players").LocalPlayer.PlayerGui.ResultsUI.Holder.Middle.Timer.Text
+waves = cwaves:split(": ")
+ttime = ctime:split(": ")
+
+syn.request({
+    Url = getgenv().webhook; --put webhook url here
+    Method = 'POST';
+    Headers = {
+        ['Content-Type'] = 'application/json';
+    };
+    Body = HttpService:JSONEncode({
+["content"] = "",
+			["username"] = "Anime Adventures",
+			["avatar_url"] = "https://tr.rbxcdn.com/e5b5844fb26df605986b94d87384f5fb/150/150/Image/Jpeg",
+			["embeds"] = {
+				{
+					["author"] = {
+						["name"] = "Info for " .. game.Players.LocalPlayer.Name .. " (@" .. game.Players.LocalPlayer.DisplayName .. ")",
+						["icon_url"] = "https://tr.rbxcdn.com/e5b5844fb26df605986b94d87384f5fb/150/150/Image/Jpeg"
+					},
+              title = 'Anime Adventures';
+              url = "https://www.roblox.com/games/8304191830/UPD-1-Anime-Adventures";
+					["description"] = "",
+					["color"] = 2534755,
+
+					["thumbnail"] = {
+						['url'] = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. game.Players.LocalPlayer.userId .. "&width=420&height=420&format=png"
+					},
+
+					["fields"] = {
+						{
+							["name"] = "Total Waves:",
+							["value"] = tostring(waves[2]) ..
+								" <:wave:997136622363627530>",
+							["inline"] = true
+						}, {
+							["name"] = "Recieved Gems:",
+							["value"] = gems .. " <:gem:997123585476927558>",
+							["inline"] = true
+						}, {
+                            ["name"] = "Recieved XP:",
+                            ["value"] = XP .. " 🧪",
+                            ["inline"] = true
+                        }, {
+                            ["name"] = "Total Time:",
+                            ["value"] = tostring(ttime[2]) .. " ⏳",
+                            ["inline"] = true
+                        }, {
+                            ["name"] = "Current Gems:",
+                            ["value"] = tostring(game.Players.LocalPlayer._stats.gem_amount.Value).." <:gem:997123585476927558>",
+                            ["inline"] = true
+                        }, {
+                            ["name"] = "Current Level:",
+                            ["value"] = tostring(game.Players.LocalPlayer.PlayerGui.spawn_units.Lives.Main.Desc.Level.Text).. " ✨",
+                            ["inline"] = true
+                        }
+					}
+				}
+				}
+			})
+		})
+game:GetService("ReplicatedStorage").endpoints["client_to_server"]["teleport_back_to_lobby"]:InvokeServer()
