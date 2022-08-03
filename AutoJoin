@@ -11,9 +11,9 @@ end
 local function Create() -- Creates the map
 local args = {
     [1] = "_lobbytemplategreen6",
-    [2] = "getgenv().map",
+    [2] = "marineford_infinite",
     [3] = true,
-    [4] = "getgenv().difficulty"
+    [4] = "Hard"
 }
 
 game:GetService("ReplicatedStorage").endpoints.client_to_server.request_lock_level:InvokeServer(unpack(args))
