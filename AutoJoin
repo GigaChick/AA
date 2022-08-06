@@ -13,7 +13,7 @@ local args = {
     [1] = "_lobbytemplategreen6",
     [2] = getgenv().map,
     [3] = true,
-    [4] = "Hard"
+    [4] = getgenv().mode
 }
 
 game:GetService("ReplicatedStorage").endpoints.client_to_server.request_lock_level:InvokeServer(unpack(args))
@@ -28,7 +28,12 @@ local args = {
 game:GetService("ReplicatedStorage").endpoints.client_to_server.request_start_game:InvokeServer(unpack(args))
 end
 
-
+local function teleport() 
+    if game:GetService("Workspace")["_DATA"].GameFinished.Value == true then
+    task.wait(5)
+    game:GetService("ReplicatedStorage").endpoints.client_to_server.teleport_back_to_lobby:InvokeServer()
+    end
+end
 
 if game.PlaceId == 8304191830 then
 while true do
@@ -39,4 +44,15 @@ task.wait(1)
 start2()
 task.wait(5)
 end
+elseif game.PlaceId == 8349889591 then
+    repeat wait() until game:IsLoaded()
+    task.wait(20)
+    game.Players.LocalPlayer.PlayerGui.MessageGui.Enabled = false
+    _G.a = true
+    while _G.a do
+        task.wait()
+        teleport()
+    end
 end
+
+    
