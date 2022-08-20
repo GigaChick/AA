@@ -1,5 +1,6 @@
 repeat wait() until game:IsLoaded()
 
+
 local function join() -- join teleporter
 local args = {
     [1] = "_lobbytemplategreen6"
@@ -13,7 +14,7 @@ local args = {
     [1] = "_lobbytemplategreen6",
     [2] = getgenv().map,
     [3] = true,
-    [4] = getgenv().mode
+    [4] = "Hard"
 }
 
 game:GetService("ReplicatedStorage").endpoints.client_to_server.request_lock_level:InvokeServer(unpack(args))
@@ -29,14 +30,12 @@ game:GetService("ReplicatedStorage").endpoints.client_to_server.request_start_ga
 end
 
 if game.PlaceId == 8304191830 then
-while true do
-join()
-task.wait(1)
-Create()
-task.wait(1)
-start2()
-task.wait(5)
+    while true do
+        join()
+        task.wait(1)
+        Create()
+        task.wait(1)
+        start2()
+        task.wait(5)
+    end
 end
-end
-
-    
